@@ -1,0 +1,10 @@
+# randombetteriterator
+iterate through numbers in a (semi) random way. compared to shuffle, this needs way way less memory (instead of linear, this is less than logarithmic). Also you could iterate backwards (using the same algorithm). The price for this, is it semirandomness, as there are patterns (for example n-1 comes directly before 0[assuming n is a product of primes]). So why use this? Think of a playlist: For small sizes, just using shuffle is fine, but for big ones, you need something better. Random repeats itself arbitrarily, shuffle needs memory and smart setup using a loopless random number generator (is probably slower than this probably) and cannot easily be inverted. Just dont use this for lottery.
+For actual speeds: This can iterate over 10000 numbers up to 1M in 0.23s on my laptop. Weirdly for numbers up to 1000M this actually speeds up to 0.05s (this shows the limitations, because of the c++ backend of modi and c++ max for long~2*1000M. Then every number is also modulated with the size of the long value). That beeing said, to compare this, I use 10M which need 0.6s, so not slower.
+
+
+
+
+# secondswithoutweekends
+literally what it says...calculates the seconds between two dates, but ignores weekends
+
