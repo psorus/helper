@@ -9,3 +9,8 @@ modular math basic type (c++ extension for python). Used in randombetteriterator
 # secondswithoutweekends
 literally what it says...calculates the seconds between two dates, but ignores weekends
 
+
+# qtime
+a couple of functions to extend secondswithoutweekends to arbitrary time calculations. Slower than secondswithoutweekends
+
+
