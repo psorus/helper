@@ -14,8 +14,8 @@ def read(fn,*args,**kwargs):
 
 
 def findfloats(q):
-    if type(q) is list:return [anastr(zw) for zw in q]
-    if type(q) is dict:return {a:findfloats(q) for zw in q}
+    if type(q) is list:return [findfloats(zw) for zw in q]
+    if type(q) is dict:return {a:findfloats(b) for a,b in q.items()}
     try:
         return float(q)
     except:
