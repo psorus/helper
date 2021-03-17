@@ -4,6 +4,8 @@ import json
 import sys
 import numpy as np
 
+import time
+
 posend=[".mp4",".avi"]
 neverinv=[".txt"]
 
@@ -44,7 +46,7 @@ def saveconf(folder,data):
 
 
 def recursiveconf(folder):
-    print("reccuring on",folder)
+    #print("reccuring on",folder)
     ret={}
     if hasconf(folder):
         for key,val in loadconf(folder).items():ret[key]=val
@@ -108,7 +110,21 @@ def workon(folder="."):
         q[fil]=mainloop(fil)
         saveconf(folder,q)
 
+def filter(folder=".",f="could work"):
+    q=recursiveconf(folder)
+    ret={}
+    for key,val in q.items():
+        if not f in val:continue
+        ret[key]=val
+        #print(key,"(",val,")")
+    return ret
 
+def shuffle(q):
+    keys=[key for key,val in q.items()]
+    np.random.shuffle(keys)
+    for key in keys:
+        os.system("vlc "+form(key)+"&")
+        time.sleep(0.2)
 
 if __name__=="__main__":
 
