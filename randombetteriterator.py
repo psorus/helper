@@ -33,7 +33,7 @@ def multimerge(f):
         ret=merge(ret,zw)
     return ret
 
-def _iternum(f,seed=0,includefirst=False):
+def _iternum(f,seed=0,includefirst=False,repeat=1):
     """f is a list of numbers that dont share factors. The iterator runs up to prod(f). includefirst: seed is the first value, !includefirst: seed is the last value"""
     it=[]
     mod=1
@@ -44,34 +44,36 @@ def _iternum(f,seed=0,includefirst=False):
     pro=1
     for zw in f:pro*=zw
     if includefirst:
-        for i in range(pro):
+        for i in range(pro*repeat):
             ac=[zw.__next__() for zw in it]
             yield multimerge(ac).value
     else:
-        for i in range(pro+1):
+        for i in range(pro*repeat+1):
             ac=[zw.__next__() for zw in it]
             if i>0:yield multimerge(ac).value
 
-def _itermaxnum(f,maxv,seed=0,includefirst=False):
+def _itermaxnum(f,maxv,seed=0,includefirst=False,repeat=1):
     """_iternum, but cut out everything >=maxv"""
-    it=_iternum(f,seed=seed,includefirst=includefirst)
+    it=_iternum(f,seed=seed,includefirst=includefirst,repeat=repeat)
     for zw in it:
         if zw>=maxv:continue
         yield zw
 
-def random_iterate(maxv,seed=0,includefirst=False):
+def random_iterate(maxv,seed=0,includefirst=False,repeat=1,disallow=None):
     """"""
+    if disallow is None:disallow=[]
     modulo=1
     f=[]
     for p in primes:
+        if p in disallow:continue
         f.append(p)
         modulo*=p
         if modulo>maxv:break#below or same, to reduce predictability for the price of speed. Main difference to random_iterate_faster
         
-    for zw in _itermaxnum(f,maxv,seed=seed,includefirst=includefirst):
+    for zw in _itermaxnum(f,maxv,seed=seed,includefirst=includefirst,repeat=repeat):
         yield zw
 
-def random_iterate_faster(maxv,seed=0,includefirst=False):
+def random_iterate_faster(maxv,seed=0,includefirst=False,repeat=1):
     """same as random_iterate, but sligthly faster and sligthly more predictable"""
     modulo=1
     f=[]
@@ -80,8 +82,31 @@ def random_iterate_faster(maxv,seed=0,includefirst=False):
         modulo*=p
         if modulo>=maxv:break
         
-    for zw in _itermaxnum(f,maxv,seed=seed,includefirst=includefirst):
+    for zw in _itermaxnum(f,maxv,seed=seed,includefirst=includefirst,repeat=repeat):
         yield zw
+
+def shift_mod(maxv,shift=3,seed=0,includefirst=False,repeat=1):
+    if not type(shift) is list:shift=[shift]
+    shiftcon=1
+    for zw in shift:
+        shiftcon*=zw
+    repeat*=shiftcon
+
+    for i,zw in enumerate(random_iterate(maxv,seed=seed,includefirst=includefirst,repeat=repeat,disallow=shift)):
+        if not i%shiftcon:yield zw
+
+
+if __name__ == '__main__' and True:
+
+    for zw in shift_mod(10,shift=7):#not all shifts possible, here 3 and 7 seem to work
+        print(zw)
+
+
+
+    exit()
+
+
+
 
 
 if __name__=="__main__":
