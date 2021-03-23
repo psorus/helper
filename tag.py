@@ -6,7 +6,7 @@ import numpy as np
 
 import time
 
-posend=[".mp4",".avi"]
+posend=[".mp4",".avi",".rm"]
 neverinv=[".txt"]
 
 showinvalids=True
@@ -15,8 +15,10 @@ showinvalids=True
 def valid(q):
     q=q.lower()
     for zw in posend:
-        if zw in q:return True
-    for zw in neverinv:
+        if len(zw)>len(q):continue
+        if q[-len(zw):]==zw:return True
+        #if zw in q:return True
+    for zw in neverinv:#kinda useless like this
         if zw in q:return False
     if showinvalids:print("found invalid file",q)
     return False
@@ -114,7 +116,7 @@ def filter(folder=".",f="could work"):
     q=recursiveconf(folder)
     ret={}
     for key,val in q.items():
-        if not f in val:continue
+        if not f in str(val):continue
         ret[key]=val
         #print(key,"(",val,")")
     return ret
@@ -125,6 +127,13 @@ def shuffle(q):
     for key in keys:
         os.system("vlc "+form(key)+"&")
         time.sleep(0.2)
+
+def copy(fro=".",too="/home/psorus/M/.p/",fstr="work"):
+    keys=[key for key,val in filter(fro,fstr).items()]
+
+    for key in keys:
+        print("copying",key,"too",too)
+        os.system(f"cp {form(key)} {too}")
 
 if __name__=="__main__":
 
