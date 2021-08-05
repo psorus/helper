@@ -133,7 +133,7 @@ def copy(fro=".",too="/home/psorus/M/.p/",fstr="work"):
 
     for key in keys:
         print("copying",key,"too",too)
-        os.system(f"cp {form(key)} {too}")
+        os.system(f"cp -n {form(key)} {too}")
 
 if __name__=="__main__":
 
