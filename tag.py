@@ -6,8 +6,8 @@ import numpy as np
 
 import time
 
-posend=[".mp4",".avi",".rm"]
-neverinv=[".txt"]
+posend=[".mp4",".avi",".rm",".wmv",".mkv",]
+neverinv=[".txt",".jpg",".png",".jpeg",".zip",".nfo"]
 
 showinvalids=True
 
@@ -66,9 +66,13 @@ def recursiveconf(folder):
     return ret
 
 
-
+rep=[" ","(",")","'","&"]
 def form(q):
-    return q.replace(" ","\\ ").replace("(","\\(").replace(")","\\)")
+    ac=q
+    for zw in rep:
+        ac=ac.replace(zw,"\\"+zw)
+    return ac
+    #return q.replace(" ","\\ ").replace("(","\\(").replace(")","\\)")
 
 def mainloop(q,shallopen=True):
     if shallopen:print("opening",q)
