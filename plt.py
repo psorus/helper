@@ -25,9 +25,9 @@ if punky:
     
     plt.how=plt.show
     
-    def show():
+    def show(*args,**kwargs):
         plow()
-        plt.how()
+        plt.how(*args,**kwargs)
     plt.show=show
 
 
