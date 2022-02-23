@@ -29,6 +29,7 @@ if punky:
         plow()
         plt.how(*args,**kwargs)
     plt.show=show
-
+else:
+    plt.style.use(['science','no-latex'])
 
 
