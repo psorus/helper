@@ -14,7 +14,7 @@ if __name__ == '__main__':
         for fn in sys.argv[1:]:
             peak(fn)
     else:
-        peak("../../data.npz")#debug
+        #peak("../../data.npz")#debug
         print("Usage: peak.py <file1> <file2> ...")
 
 
