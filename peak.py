@@ -3,8 +3,10 @@ import sys
 
 
 def peak(fn):
+    print(f"peaking {fn}")
     f=np.load(fn)
     print(f.files)
+    print("")
 
 
 
