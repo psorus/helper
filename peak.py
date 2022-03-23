@@ -5,7 +5,12 @@ import sys
 def peak(fn):
     print(f"peaking {fn}")
     f=np.load(fn)
-    print(f.files)
+    #print(f.files)
+    for fil in f.files:
+        ac=f[fil]
+        print(fil,ac.shape)
+        if np.prod(ac.shape)<5:
+            print(ac)
     print("")
 
 
