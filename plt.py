@@ -31,5 +31,6 @@ if punky:
     plt.show=show
 else:
     plt.style.use(['science','no-latex'])
+    plt.how=plt.show
 
 
