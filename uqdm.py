@@ -3,7 +3,8 @@ import numpy as np
 
 def uqdm(iterable,rounde=4,*args,**kwargs):
     t=tqdm(iterable,*args,**kwargs)
-    def func(text,rounde=rounde,t=t):
+    def func(tex,rounde=rounde,t=t):
+        text=tex
         if type(text) is float or type(text) is np.float64:
             text=round(text,rounde)
             prekomma,postkomma=str(text).split('.')
@@ -11,6 +12,7 @@ def uqdm(iterable,rounde=4,*args,**kwargs):
                 postkomma+='0'
             text=prekomma+'.'+postkomma
         t.set_description_str(str(text))
+        return tex
     for zw in t:
         yield zw,func
 
