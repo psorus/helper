@@ -2,8 +2,16 @@ import numpy as np
 import sys
 from simplestat import sprint, statinf
 
+
+
+
+f=None
+ac=None
+
 def peak(fn):
     print(f"peaking {fn}")
+    global f
+    global ac
     f=np.load(fn)
     #print(f.files)
     for fil in f.files:
@@ -23,12 +31,3 @@ if __name__ == '__main__':
     else:
         #peak("../../data.npz")#debug
         print("Usage: peak.py <file1> <file2> ...")
-
-
-
-
-
-
-
-
-
