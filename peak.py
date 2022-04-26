@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-
+from simplestat import sprint, statinf
 
 def peak(fn):
     print(f"peaking {fn}")
