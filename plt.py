@@ -48,4 +48,29 @@ else:
     plt.style.use(['science','no-latex'])
     plt.how=plt.show
 
+def quantlimx(x,alpha=0.01, inc=0.0):
+    import numpy as np
+    xmin=np.quantile(x,alpha)
+    xmax=np.quantile(x,1-alpha)
+    if inc>0:
+        delta=xmax-xmin
+        xmin-=inc*delta/2
+        xmax+=inc*delta/2
+    plt.xlim((xmin,xmax))
+
+def quantlimy(y,alpha=0.01, inc=0.0):
+    import numpy as np
+    ymin=np.quantile(y,alpha)
+    ymax=np.quantile(y,1-alpha)
+    if inc>0:
+        delta=ymax-ymin
+        ymin-=inc*delta/2
+        ymax+=inc*delta/2
+    plt.ylim((ymin,ymax))
+
+plt.xlimq=quantlimx
+plt.ylimq=quantlimy
+plt.quantlimx=quantlimx
+plt.quantlimy=quantlimy
+
 
