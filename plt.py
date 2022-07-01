@@ -57,6 +57,7 @@ def quantlimx(x,alpha=0.01, inc=0.0):
         xmin-=inc*delta/2
         xmax+=inc*delta/2
     plt.xlim((xmin,xmax))
+    return xmin,xmax
 
 def quantlimy(y,alpha=0.01, inc=0.0):
     import numpy as np
@@ -67,6 +68,7 @@ def quantlimy(y,alpha=0.01, inc=0.0):
         ymin-=inc*delta/2
         ymax+=inc*delta/2
     plt.ylim((ymin,ymax))
+    return ymin,ymax
 
 plt.xlimq=quantlimx
 plt.ylimq=quantlimy
