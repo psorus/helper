@@ -17,7 +17,7 @@ def peak(fn):
     for fil in f.files:
         ac=f[fil]
         print(fil,ac.shape)
-        if np.prod(ac.shape)<5:
+        if np.prod(ac.shape)<=10:
             print(ac)
     print("")
 
