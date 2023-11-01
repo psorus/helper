@@ -3,6 +3,8 @@ matplotlib.use('module://matplotlib-backend-kitty')
 import matplotlib.pyplot as plt
 
 import mplcyberpunk
+import scienceplots
+
 
 import sys
 
